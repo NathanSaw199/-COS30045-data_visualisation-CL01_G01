@@ -1,0 +1,90 @@
+/* responsive SVG wrapper */
+.responsive-svg-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+@media (max-width: 600px) {
+  .responsive-svg-container {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* filter buttons */
+#filters_screen {
+  margin: 1rem 0;
+}
+#filters_screen .filter {
+  display: inline-block;
+  background-color: #ffe5b4;    /* light peach */
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #5a3e2b;
+  transition: background-color 0.2s;
+}
+#filters_screen .filter:hover {
+  background-color: #f4c48b;
+}
+#filters_screen .filter.active {
+  background-color: #d2691e;    /* burnt orange */
+  color: white;
+}
+
+/* bars */
+.bar {
+  fill: #606464;                /* slate gray */
+  stroke: #fffaf0;              /* to show crisp bin boundaries */
+  stroke-width: 2;
+}
+
+/* axes */
+.axis path,
+.axis line {
+  stroke: #5a3e2b;
+}
+.axis text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.75rem;
+  fill: #5a3e2b;
+}
+
+/* axis labels */
+.axis-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.85rem;
+  fill: #5a3e2b;
+  text-anchor: middle;
+}
+
+/* filter buttons */
+#filters_size {
+  margin: 1rem 0;
+}
+#filters_size .filter {
+  display: inline-block;
+  background-color: #ffe5b4;    /* light peach */
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #5a3e2b;
+  transition: background-color 0.2s;
+}
+#filters_size .filter:hover {
+  background-color: #f4c48b;
+}
+#filters_size .filter.active {
+  background-color: #d2691e;    /* burnt orange */
+  color: white;
+}
+.bar{
+  fill:#606464;
+  stroke:#fffaf0;
+  stroke-width:2;
+}
