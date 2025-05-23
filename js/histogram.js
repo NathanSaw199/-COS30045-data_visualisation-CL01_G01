@@ -1,27 +1,44 @@
-const drawHistogram = (data) => {
+const drawHistogram = (data, selectedJurisdiction = 'all') => {
   // Clear any existing SVG to prevent duplicates
   d3.select("#histogram svg").remove();
 
-  // Aggregate total fines by year and jurisdiction
-  const finesByYearJurisdiction = d3.rollup(
+  // Get all years and jurisdictions
+  const years = Array.from(new Set(data.map(d => d.year))).sort((a, b) => a - b);
+  let jurisdictions = Array.from(new Set(data.map(d => d.jurisdiction)));
+
+  // If a specific jurisdiction or array is selected, filter to just those
+  if (selectedJurisdiction !== 'all') {
+    if (Array.isArray(selectedJurisdiction)) {
+      jurisdictions = jurisdictions.filter(j => selectedJurisdiction.includes(j));
+    } else {
+      jurisdictions = jurisdictions.filter(j => j === selectedJurisdiction);
+    }
+  }
+
+  // Aggregate fines by year and jurisdiction
+  const finesByYearJur = d3.rollup(
     data,
     v => d3.sum(v, d => d.fines),
     d => d.year,
     d => d.jurisdiction
   );
 
-  // Convert to array format for easier use
-  const chartData = [];
-  finesByYearJurisdiction.forEach((jurisdictionMap, year) => {
-    jurisdictionMap.forEach((fines, jurisdiction) => {
-      chartData.push({ year, jurisdiction, fines });
-    });
-  });
+  // Prepare line data for each jurisdiction
+  const lineData = jurisdictions.map(jurisdiction => {
+    return {
+      jurisdiction,
+      label: jurisdiction,
+      values: years.map(year => {
+        const fines = finesByYearJur.get(year)?.get(jurisdiction) || 0;
+        return { year, fines };
+      })
+    };
+  }).filter(d => d.values.some(v => v.fines > 0)); // Only show lines with data
 
   // Set dimensions and margins
-  const width = 600;
+  const width = 1000;
   const height = 400;
-  const margin = { top: 40, right: 20, bottom: 60, left: 70 };
+  const margin = { top: 40, right: 220, bottom: 60, left: 70 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -34,37 +51,58 @@ const drawHistogram = (data) => {
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   // X scale (years)
-  const xScale = d3.scaleBand()
-    .domain([...new Set(chartData.map(d => d.year))])
+  const xScale = d3.scalePoint()
+    .domain(years)
     .range([0, innerWidth])
-    .padding(0.2);
+    .padding(1);
 
   // Y scale (fines)
   const yScale = d3.scaleLinear()
-    .domain([0, d3.max(chartData, d => d.fines)])
+    .domain([0, d3.max(lineData, d => d3.max(d.values, v => v.fines))])
     .range([innerHeight, 0])
     .nice();
 
-  // Color scale for jurisdictions
+  // Color scale for lines
   const colorScale = d3.scaleOrdinal()
-    .domain([...new Set(chartData.map(d => d.jurisdiction))])
-    .range(d3.schemeCategory10);
+    .domain(lineData.map(d => d.label))
+    .range(d3.schemeTableau10);
 
-  // Draw bars
-  innerChart.selectAll("rect")
-    .data(chartData)
-    .join("rect")
-    .attr("x", d => xScale(d.year))
-    .attr("y", d => yScale(d.fines))
-    .attr("width", xScale.bandwidth())
-    .attr("height", d => innerHeight - yScale(d.fines))
-    .attr("fill", d => colorScale(d.jurisdiction));
+  // Draw lines
+  const line = d3.line()
+    .x(d => xScale(d.year))
+    .y(d => yScale(d.fines));
+
+  innerChart.selectAll(".line-path")
+    .data(lineData)
+    .join("path")
+    .attr("class", "line-path")
+    .attr("fill", "none")
+    .attr("stroke", d => colorScale(d.label))
+    .attr("stroke-width", 2)
+    .attr("d", d => line(d.values));
+
+  // Draw circles at data points
+  lineData.forEach(comboData => {
+    innerChart.selectAll(`.circle-${comboData.label.replace(/\s+/g, '-')}`)
+      .data(comboData.values)
+      .join("circle")
+      .attr("class", `circle-${comboData.label.replace(/\s+/g, '-')}`)
+      .attr("cx", d => xScale(d.year))
+      .attr("cy", d => yScale(d.fines))
+      .attr("r", 3)
+      .attr("fill", colorScale(comboData.label));
+  });
 
   // X axis
-  const bottomAxis = d3.axisBottom(xScale);
+  const bottomAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
   innerChart.append("g")
     .attr("transform", `translate(0, ${innerHeight})`)
-    .call(bottomAxis);
+    .call(bottomAxis)
+    .selectAll("text")
+    .attr("dy", "0.5em")
+    .attr("dx", "-1.5em")
+    .attr("transform", "rotate(-40)")
+    .style("text-anchor", "end");
 
   // X axis label
   svg.append("text")
@@ -90,23 +128,23 @@ const drawHistogram = (data) => {
 
   // Legend
   const legend = svg.append("g")
-    .attr("transform", `translate(${width - margin.right - 120}, ${margin.top})`);
+    .attr("transform", `translate(${width - margin.right + 40}, ${margin.top})`);
 
-  const jurisdictions = [...new Set(chartData.map(d => d.jurisdiction))];
-  jurisdictions.forEach((jurisdiction, i) => {
+  lineData.forEach((combo, i) => {
     const legendRow = legend.append("g")
       .attr("transform", `translate(0, ${i * 20})`);
-    
-    legendRow.append("rect")
-      .attr("width", 10)
-      .attr("height", 10)
-      .attr("fill", colorScale(jurisdiction));
+
+    legendRow.append("line")
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", 20)
+      .attr("y2", 0)
+      .attr("stroke", colorScale(combo.label))
+      .attr("stroke-width", 2);
 
     legendRow.append("text")
-      .attr("x", 20)
-      .attr("y", 10)
-      .attr("text-anchor", "start")
-      .attr("font-size", "12px")
-      .text(jurisdiction);
+      .attr("x", 30)
+      .attr("y", 4)
+      .text(combo.label);
   });
-}
+};

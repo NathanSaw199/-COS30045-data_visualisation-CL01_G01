@@ -10,13 +10,13 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #fffaf0;   /* pale cream */
+  background-color: #f5f5f5;   /* light grey */
   color: #5a3e2b;              /* dark brown */
   line-height: 1.6;
 }
 
 header {
-  background-color: #d2691e;   /* burnt orange */
+  background-color: #696561;   /* burnt orange */
   color: white;
   padding: 1rem 2rem;
 }
@@ -30,9 +30,29 @@ main {
 }
 
 footer {
-  background-color: #5a3e2b;   /* dark brown */
+  background-color: #696561;   /* dark brown */
   color: white;
   text-align: center;
   padding: 1rem;
   font-size: 0.9rem;
+}
+
+/* Compact Choices.js multi-select tags */
+.choices__list--multiple .choices__item {
+  font-size: 0.9em;
+  padding: 2px 8px;
+  margin: 2px 2px;
+  border-radius: 12px;
+  background-color: #1976a3;
+  color: #fff;
+  min-width: unset;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.choices__list--multiple {
+  flex-wrap: wrap;
+  max-height: 40px;
+  overflow-y: auto;
 }
