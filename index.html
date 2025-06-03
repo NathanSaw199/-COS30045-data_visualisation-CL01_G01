@@ -11,13 +11,75 @@
 </head>
 <body>
   <header>
-    <h1>Speeding</h1>
+    <h1>Australian Speeding Traffic Analytics</h1>
   </header>
 
   <main>
-    <div>
+    <main>
+  <!-- Data Story Section -->
+  <section id="data-story" class="data-story-section">
+    <div class="story-container">
+      <h1 class="story-title">The Hidden Cost of Speed</h1>
+      <h2 class="story-subtitle">Understanding Australia's Speeding Fine Landscape</h2>
+      
+      <div class="story-content">
+        <div class="story-text">
+          <p class="story-intro">
+            Every year, millions of Australian drivers receive speeding fines, contributing billions to state revenues. 
+            But beyond the numbers lies a complex story of road safety, enforcement strategies, and regional differences 
+            that shape how we experience driving across the continent.
+          </p>
+          
+          <div class="story-highlights">
+            <div class="highlight-card">
+              <h3>Multi-State Analysis</h3>
+              <p>Compare speeding patterns across all Australian jurisdictions from Victoria to Western Australia</p>
+            </div>
+            
+            <div class="highlight-card">
+              <h3>Detection Methods</h3>
+              <p>Explore how different enforcement technologies impact fine distributions and road safety outcomes</p>
+            </div>
+            
+            <div class="highlight-card">
+              <h3>Age Demographics</h3>
+              <p>Discover which age groups are most affected by speeding fines and enforcement patterns</p>
+            </div>
+            <div class="highlight-card">
+              <h3>Data Source</h3>
+              <p>Built using comprehensive Australian road safety enforcement data from BITRE, providing authentic insights into speeding fine patterns and trends across the continent</p>
+              <a href="https://www.bitre.gov.au/publications/2024/road-safety-enforcement-data" class="data-source-btn" target="_blank" rel="noopener noreferrer">
+                View Data Source
+              </a>
+            </div>
+          </div>
+          
+          <p class="story-call-to-action">
+            Ready to dive into the data? Our interactive visualizations reveal the patterns, trends, and insights 
+            hidden within Australia's speeding fine records. Filter by jurisdiction, detection method, and time 
+            period to uncover the stories your state's data tells.
+          </p>
+        </div>
+      </div>
+      
+      <div class="story-actions">
+        
+        
+        <button id="scroll-to-viz-btn" class="scroll-btn">
+          <span>View Visualizations</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visualization Section -->
+  <section id="visualization-section" class="viz-section">
+    <div class="viz-header">
       <h1>Speed Fines by Jurisdiction</h1>
-     
+      <p class="viz-description">Interactive analysis of speeding fines across Australian states and territories</p>
     </div>
     <!-- div for screen-tech filter buttons -->
 
@@ -59,20 +121,31 @@
     
     <div id="piechart" class="responsive-svg-container"></div>
 
-      <h3>Data source</h3>
-      <p>
-        <a href="#">
-          Australian Speed Fines Data
-        </a><br>
-        Downloaded Jan 2025
-      </p>
-    </div>
+    
   </main>
 
   <footer>
     <p>© 2025 Data Visualisation </p>
+    <p class="source-text">Data source: <a href="https://www.bitre.gov.au/publications/2024/road-safety-enforcement-data" class="source-link">Australian Speed Fines Data</a> (Downloaded January 2025)</p>
   </footer>
-
+<!-- Smooth scroll functionality -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const exploreBtn = document.getElementById('explore-data-btn');
+    const scrollBtn = document.getElementById('scroll-to-viz-btn');
+    const vizSection = document.getElementById('visualization-section');
+    
+    function smoothScrollToViz() {
+      vizSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    
+    
+    scrollBtn.addEventListener('click', smoothScrollToViz);
+  });
+</script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
   <script src="js/shared-constants.js"></script>

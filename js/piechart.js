@@ -1,7 +1,7 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 console.log(" piechart.js loaded");
 
-const width = 500, height = 400, radius = Math.min(width, height) / 2;
+const width = 500, height = 400, radius = Math.min(width, height) / 2 - 50;
 const color = d3.scaleOrdinal(d3.schemeSet2);
 
 let allData = [];
@@ -9,12 +9,12 @@ let allData = [];
 d3.csv("data/newcsv.csv").then(data => {
   allData = data;
   console.log(" Raw data sample:", data.slice(0, 5));
-  renderPieChart(data);  // Initial render
-  setupListeners();      // Set up filter interactivity
+  renderPieChart(data);  
+  setupListeners();      
 });
 
 function renderPieChart(data) {
-  d3.select("#piechart").html("");  // Clear previous
+  d3.select("#piechart").html("");  
 
   if (!data || data.length === 0) {
     d3.select("#piechart")
@@ -58,7 +58,8 @@ function renderPieChart(data) {
     .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
   const pie = d3.pie().value(d => d.fineCount);
-  const arc = d3.arc().innerRadius(0).outerRadius(radius);
+  const arc = d3.arc().innerRadius(0).outerRadius(radius - 40);
+  const labelArc = d3.arc().innerRadius(radius - 20).outerRadius(radius - 20);
 
   const arcs = svg.selectAll("g")
     .data(pie(ageData))
@@ -70,11 +71,33 @@ function renderPieChart(data) {
     .attr("d", arc)
     .attr("fill", d => color(d.data.ageGroup));
 
-  arcs.append("text")
-    .attr("transform", d => `translate(${arc.centroid(d)})`)
-    .attr("text-anchor", "middle")
-    .style("font-size", "11px")
-    .text(d => d.data.ageGroup);
+ // add connecting lines - design update since the labels inside wasnt displaying properly when sector is small
+arcs.append("polyline")
+  .attr("stroke", "#333")
+  .attr("stroke-width", 1)
+  .attr("fill", "none")
+  .attr("points", function(d) {
+    const centroid = arc.centroid(d);
+    const labelPos = labelArc.centroid(d);
+    const outerPos = [labelPos[0] * 1.0, labelPos[1] * 1.2]; 
+    return [centroid, labelPos, outerPos];
+  });
+
+// external labeks - design update since the labels inside wasnt displaying properly when sector is small
+arcs.append("text")
+  .attr("transform", function(d) {
+    const pos = labelArc.centroid(d);
+    const finalPos = [pos[0] * 1.25, pos[1] * 1.25]; 
+    return `translate(${finalPos})`;
+  })
+  .attr("text-anchor", function(d) {
+    const pos = labelArc.centroid(d);
+    return pos[0] > 0 ? "start" : "end";
+  })
+  .style("font-size", "11px")
+  .style("font-weight", "bold")
+  .style("fill", "#000")  
+  .text(d => d.data.ageGroup);
 }
 
 function setupListeners() {
@@ -87,14 +110,14 @@ function setupListeners() {
       console.log("Selected methods:", selectedMethods);
 
       const filtered = allData.filter(row => {
-        // Use the exact column names from CSV
+        
         const jur = row["JURISDICTION"];
         const method = row["DETECTION_METHOD"] || row["METHOD"]; //debugging
         
-        // Handle jurisdiction filtering
+       
         const jurMatch = selectedJurisdictions.length === 0 || 
                         selectedJurisdictions.some(selectedJur => {
-                          // Map full names to abbreviations
+                     
                           const jurMapping = {
                             'VIC': ['VIC', 'Victoria'],
                             'NSW': ['NSW', 'New South Wales'],
@@ -112,7 +135,7 @@ function setupListeners() {
                                  );
                         });
 
-        // Handle detection method filtering with the same logic as load-data.js
+       
         let effectiveMethods = new Set(selectedMethods);
         if (selectedMethods.includes('Fixed camera') || selectedMethods.includes('Mobile camera')) {
           if (selectedMethods.includes('Fixed camera')) effectiveMethods.add('Fixed or mobile camera');
