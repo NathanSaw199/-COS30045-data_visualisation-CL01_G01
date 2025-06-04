@@ -16,7 +16,7 @@
 }
 #filters_screen .filter {
   display: inline-block;
-  background-color: #ffe5b4;    /* light peach */
+  background-color: #ffe5b4;    
   border: none;
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
@@ -30,14 +30,14 @@
   background-color: #f4c48b;
 }
 #filters_screen .filter.active {
-  background-color: #d2691e;    /* burnt orange */
+  background-color: #d2691e;    
   color: white;
 }
 
 /* bars */
 .bar {
-  fill: #606464;                /* slate gray */
-  stroke: #fffaf0;              /* to show crisp bin boundaries */
+  fill: #606464;                
+  stroke: #fffaf0;              
   stroke-width: 2;
 }
 
@@ -66,7 +66,7 @@
 }
 #filters_size .filter {
   display: inline-block;
-  background-color: #ffe5b4;    /* light peach */
+  background-color: #ffe5b4;    
   border: none;
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
@@ -80,7 +80,7 @@
   background-color: #f4c48b;
 }
 #filters_size .filter.active {
-  background-color: #d2691e;    /* burnt orange */
+  background-color: #d2691e;    
   color: white;
 }
 .bar{
@@ -106,12 +106,11 @@
   padding: 2px 8px;
 }
 
-/* Hide tags after the second one */
 .choices__list--multiple .choices__item:nth-child(n+3) {
   display: none;
 }
 
-/* Custom multiselect dropdown styles */
+/* multiselect dropdown styles */
 .custom-multiselect {
   position: relative;
   width: 140px;
@@ -185,4 +184,112 @@
   color: #5a3e2b;
   margin-bottom: 4px;
   margin-left: 2px;
+}
+
+/* Simple Flash Cards */
+
+.flash-cards-container {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.flash-card {
+  background: #ffffff;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  padding: 1.2rem;
+  display: none;
+  font-size: 0.9rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.flash-card.show {
+  display: block;
+}
+
+/* Different colors for each jurisdiction */
+.flash-card.vic { border-left: 4px solid #007bff; }
+.flash-card.nsw { border-left: 4px solid #28a745; }
+.flash-card.qld { border-left: 4px solid #ffc107; }
+.flash-card.sa { border-left: 4px solid #dc3545; }
+.flash-card.tas { border-left: 4px solid #6f42c1; }
+.flash-card.wa { border-left: 4px solid #fd7e14; }
+.flash-card.nt { border-left: 4px solid #20c997; }
+.flash-card.act { border-left: 4px solid #e83e8c; }
+.flash-card.multi { border-left: 4px solid #6c757d; }
+
+.flash-card-title {
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  color: #343a40;
+  font-size: 1rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.flash-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #495057;
+}
+
+.flash-card li {
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+/* Grid layout for multiple cards */
+@media (min-width: 768px) {
+  .flash-cards-container.multiple {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+/* DEBUGGING --- verride the existing responsive-svg-container styles  */
+.dashboard-layout .responsive-svg-container {
+  width: 100%;
+  max-width: none; 
+  margin: 0; 
+}
+
+/* Ensure dashboard layout takes precedence */
+.dashboard-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 400px !important;
+  gap: 2rem !important;
+  margin: 2rem auto !important;
+  max-width: 1400px !important;
+}
+
+.left-column {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2rem !important;
+}
+
+.right-column {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+}
+
+/* Ensure chart containers fill their parent containers */
+.dashboard-layout #histogram,
+.dashboard-layout #piechart {
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+/* this is tp make sure flash cards are outside the grid */
+.flash-cards-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 2rem auto 0 auto;
+  grid-column: 1 / -1; 
+}
+
+.dashboard-layout #piechart {
+  margin-top: 8rem; 
 }

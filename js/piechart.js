@@ -1,8 +1,12 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 console.log(" piechart.js loaded");
 
+const wongColors = [
+  "#000000", "#E69F00", "#56B4E9", "#009E73", 
+  "#F0E442", "#0072B2", "#D55E00", "#CC79A7"
+];
 const width = 500, height = 400, radius = Math.min(width, height) / 2 - 50;
-const color = d3.scaleOrdinal(d3.schemeSet2);
+const color = d3.scaleOrdinal(wongColors);
 
 let allData = [];
 
@@ -14,7 +18,7 @@ d3.csv("data/newcsv.csv").then(data => {
 });
 
 function renderPieChart(data) {
-  d3.select("#piechart").html("");  
+  d3.select("#piechart svg").remove();  
 
   if (!data || data.length === 0) {
     d3.select("#piechart")

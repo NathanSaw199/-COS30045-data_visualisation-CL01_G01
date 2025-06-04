@@ -62,11 +62,38 @@ const drawHistogram = (data, selectedJurisdiction = 'all') => {
     .range([innerHeight, 0])
     .nice();
 
+  // Use of colourblinf drienldy colurs pallets 
+  //https://www.color-hex.com/color-palette/1018347
+  const wongColors = [
+    "#000000", "#E69F00", "#56B4E9", "#009E73", 
+    "#F0E442", "#0072B2", "#D55E00", "#CC79A7"
+  ];
+
   // Color scale for lines
   const colorScale = d3.scaleOrdinal()
     .domain(lineData.map(d => d.label))
-    .range(d3.schemeTableau10);
+    .range(wongColors);
+  
+  
 
+// Define different dash patterns
+const dashPatterns = [
+  "none",           // solid line
+  "5,5",            // dashed (--- --- ---)
+  "2,3",            // short dash
+  "10,5,2,5",       // dash-dot (-.-.-.)
+  "10,5,2,5,2,5",   // dash-dot-dot (-..-..-..)
+  "15,3,3,3",       // long dash-dot
+  "3,3",            // dotted (...)
+  "8,3,2,3,2,3",    // dash-dot-dot with longer dash
+  "12,2",           // long dash
+  "6,2,2,2,2,2"     // dash with multiple dots
+];
+
+// Create dash pattern scale
+const dashScale = d3.scaleOrdinal()
+  .domain(lineData.map(d => d.label))
+  .range(dashPatterns);
   // Draw lines
   const line = d3.line()
     .x(d => xScale(d.year))
@@ -79,6 +106,7 @@ const drawHistogram = (data, selectedJurisdiction = 'all') => {
     .attr("fill", "none")
     .attr("stroke", d => colorScale(d.label))
     .attr("stroke-width", 2)
+    .attr("stroke-dasharray", d => selectedJurisdiction === 'all' ? "none" : dashScale(d.label)) 
     .attr("d", d => line(d.values));
 
   // Draw circles at data points
@@ -140,7 +168,10 @@ const drawHistogram = (data, selectedJurisdiction = 'all') => {
       .attr("x2", 20)
       .attr("y2", 0)
       .attr("stroke", colorScale(combo.label))
-      .attr("stroke-width", 2);
+      .attr("stroke-width", 2)
+      .attr("stroke-dasharray", selectedJurisdiction === 'all' ? "none" : dashScale(combo.label));
+      
+      
 
     legendRow.append("text")
       .attr("x", 30)

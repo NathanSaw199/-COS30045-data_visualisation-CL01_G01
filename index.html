@@ -15,7 +15,7 @@
   </header>
 
   <main>
-    <main>
+    
   <!-- Data Story Section -->
   <section id="data-story" class="data-story-section">
     <div class="story-container">
@@ -81,48 +81,183 @@
       <h1>Speed Fines by Jurisdiction</h1>
       <p class="viz-description">Interactive analysis of speeding fines across Australian states and territories</p>
     </div>
-    <!-- div for screen-tech filter buttons -->
-
-    <!-- NEW: div for screen-size filter buttons -->
-
-    <div class="dropdown-row">
-      <div>
-        <div class="dropdown-title">Select jurisdiction</div>
-        <div id="jurisdictionDropdown" class="custom-multiselect">
-          <div class="dropdown-selected">Select</div>
-          <div class="dropdown-list">
-            <label><input type="checkbox" value="VIC"> Victoria</label>
-            <label><input type="checkbox" value="NSW"> New South Wales</label>
-            <label><input type="checkbox" value="QLD"> Queensland</label>
-            <label><input type="checkbox" value="SA"> South Australia</label>
-            <label><input type="checkbox" value="TAS"> Tasmania</label>
-            <label><input type="checkbox" value="WA"> Western Australia</label>
-            <label><input type="checkbox" value="NT"> Northern Territory</label>
-            <label><input type="checkbox" value="ACT"> Australian Capital Territory</label>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="dropdown-title">Select detection method</div>
-        <div id="detectionDropdown" class="custom-multiselect">
-          <div class="dropdown-selected">Select</div>
-          <div class="dropdown-list">
-            <!-- Detection method checkboxes will be populated by JS -->
-          </div>
+  
+  
+  <!-- Filter Controls -->
+  <div class="dropdown-row">
+    <div>
+      <div class="dropdown-title">Select jurisdiction</div>
+      <div id="jurisdictionDropdown" class="custom-multiselect">
+        <div class="dropdown-selected">Select</div>
+        <div class="dropdown-list">
+          <label><input type="checkbox" value="VIC"> Victoria</label>
+          <label><input type="checkbox" value="NSW"> New South Wales</label>
+          <label><input type="checkbox" value="QLD"> Queensland</label>
+          <label><input type="checkbox" value="SA"> South Australia</label>
+          <label><input type="checkbox" value="TAS"> Tasmania</label>
+          <label><input type="checkbox" value="WA"> Western Australia</label>
+          <label><input type="checkbox" value="NT"> Northern Territory</label>
+          <label><input type="checkbox" value="ACT"> Australian Capital Territory</label>
         </div>
       </div>
     </div>
-  
-    <!-- div for charts -->
-    <div id="histogram" class="responsive-svg-container"></div>
-    <div id="scatterplot" class="responsive-svg-container"></div>
-    <div id="filters_size"></div>
-    <div class="body">
-    
-    <div id="piechart" class="responsive-svg-container"></div>
 
+   <!-- Dashboard Layout -->
+  <div>
+      <div class="dropdown-title">Select detection method</div>
+      <div id="detectionDropdown" class="custom-multiselect">
+        <div class="dropdown-selected">Select</div>
+        <div class="dropdown-list">
+          <!-- Detection method checkboxes will be populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Dashboard Layout -->
+  <div class="dashboard-layout">
+    <!-- Left Column -->
+    <div class="left-column">
+      <!-- Bar Chart Placeholder -->
+      <div class="bar-chart-placeholder">
+        <div>
+          <h2>Bar Chart</h2>
+          <p>Space reserved for bar chart visualization - Nathan add the bar chart here</p>
+        </div>
+      </div>
+      
+      <!-- Line Chart -->
+      <div id="histogram" class="responsive-svg-container">
+        <div class="chart-title"><h2>Trends of Speeding Fines in Australia</h2></div>
+      </div>
+    </div>
     
-  </main>
+    <!-- Right Column -->
+    <div class="right-column">
+      <!-- Pie Chart -->
+      <div id="piechart" class="responsive-svg-container">
+        <div class="pie-chart-title"><h2>Fines by Age Group</h2></div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="flash-cards-container" id="flashCardsContainer">
+    
+    <div class="flash-card vic" id="vicNote">
+      <div class="flash-card-title">Victoria Data Notes</div>
+      <ul>
+        <li>Breath/drug tests: Database only provides detection data</li>
+        <li>No fines, arrests, or charges data for breath/drug test metrics</li>
+        <li>Road Policing Unit tests 3 substances: MDMA, Amphetamine, THC</li>
+        <li>Other drugs detected through collision bloods (not included)</li>
+      </ul>
+    </div>
+
+    <div class="flash-card nsw" id="nswNote">
+      <div class="flash-card-title">New South Wales Data Notes</div>
+      <ul>
+        <li>Age data: Only available for police-issued fines (not camera fines)</li>
+        <li>Police-issued fines collected from NSW Police Force</li>
+        <li>Camera fines collected by NSW Revenue (separate agency)</li>
+        <li>Speed bands changed July 2009 and June 2023</li>
+        <li>Up to 2019: excludes red-light camera speed offences</li>
+        <li>Detection methods: Fixed camera, mobile camera, police issued (no combined)</li>
+        <li>Arrests generally not applicable</li>
+      </ul>
+    </div>
+
+    <div class="flash-card qld" id="qldNote">
+      <div class="flash-card-title">Queensland Data Notes</div>
+      <ul>
+        <li>Age category data: Not recorded at all</li>
+        <li>Breath/drug tests: Fines not recorded, charges used as proxy</li>
+        <li>Camera detections reviewed by Traffic Camera Office before fining</li>
+        <li>Not all camera detections result in infringement notices</li>
+        <li>Detection methods: Fixed camera, mobile camera, police issued (no combined)</li>
+        <li>Unlicensed driving: Includes both arrests and charges (cannot separate)</li>
+      </ul>
+    </div>
+
+    <div class="flash-card sa" id="saNote">
+      <div class="flash-card-title">South Australia Data Notes</div>
+      <ul>
+        <li>Breath tests: Proxy count created from fines + charges (2023)</li>
+        <li>Detection methods: Fixed camera, mobile camera, police issued (no combined)</li>
+        <li>Standard police enforcement data collection</li>
+        <li>Age group data available where collected</li>
+      </ul>
+    </div>
+
+    <div class="flash-card tas" id="tasNote">
+      <div class="flash-card-title">Tasmania Data Notes</div>
+      <ul>
+        <li>Breath test data: 2020-2022 unavailable due to quality issues</li>
+        <li>Speed cameras: Civilian operators not used in 2012</li>
+        <li>Equipment and software issues impact speed camera detections</li>
+        <li>Arrests generally not applicable</li>
+      </ul>
+    </div>
+
+    <div class="flash-card wa" id="waNote">
+      <div class="flash-card-title">Western Australia Data Notes</div>
+      <ul>
+        <li>COVID-19: Random breath testing suspended 17 Mar - 6 Jun 2020</li>
+        <li>Lower than usual breath test numbers in 2020-2021</li>
+        <li>Detection modes: On-The-Spot, mobile, fixed, average speed, red light</li>
+        <li>Breath tests: Proxy count used for 2023 data</li>
+      </ul>
+    </div>
+
+    <div class="flash-card nt" id="ntNote">
+      <div class="flash-card-title">Northern Territory Data Notes</div>
+      <ul>
+        <li>Drug tests: 2023 data unavailable due to quality issues</li>
+        <li>Detection methods: Fixed camera, mobile camera, police issued (no combined)</li>
+        <li>Standard police enforcement data collection otherwise</li>
+      </ul>
+    </div>
+
+    <div class="flash-card act" id="actNote">
+      <div class="flash-card-title">Australian Capital Territory Data Notes</div>
+      <ul>
+        <li>Fines data not recorded by ACT Police</li>
+        <li>Charges data used as proxy for breath/drug test counts</li>
+        <li>Speeding data: 2022 data not available</li>
+        <li>Detection methods: Fixed camera, mobile camera, police issued (no combined)</li>
+        <li>Seatbelt fines: Some collected by ACT Roads (not ACT Police)</li>
+      </ul>
+    </div>
+
+    <div class="flash-card multi" id="multiStateNote">
+      <div class="flash-card-title">Multi-State Comparison Notes</div>
+      <ul>
+        <li>Different data collection methods between jurisdictions</li>
+        <li>Some agencies collect partial enforcement data only</li>
+        <li>Camera-issued vs police-issued fines vary by state</li>
+        <li>Proxy counts used where direct data unavailable</li>
+        <li>Data may not be directly comparable across jurisdictions</li>
+      </ul>
+    </div>
+
+    <div class="flash-card multi" id="overviewNote">
+      <div class="flash-card-title">Australian Road Safety Enforcement Data Overview</div>
+      <ul>
+        <li><strong>Data Source:</strong> <a href="https://www.bitre.gov.au/publications/2024/road-safety-enforcement-data"> Bureau of Infrastructure and Transport Research Economics (BITRE)</a></li>
+        <li><strong>Collection:</strong> Police agencies in each state and territory</li>
+        <li><strong>Coverage:</strong> Police-issued fines from 2017, enhanced from 2023</li>
+        <li><strong>New for 2023:</strong> Monthly data, age groups, detection methods, drug types</li>
+        <li><strong>Limitations:</strong> Some agencies collect partial data only</li>
+        <li><strong>Detection Methods:</strong> Fixed cameras, mobile cameras, police-issued</li>
+        <li><strong>Data Quality:</strong> Subject to revision, some gaps due to quality issues</li>
+        <li><strong>Note:</strong> Not all states share enforcement data publicly</li>
+      </ul>
+    </div>
+
+  </div> <!-- Close flash-cards-container -->
+  
+ </section>
+</main>
 
   <footer>
     <p>© 2025 Data Visualisation </p>
@@ -148,6 +283,7 @@
 </script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
+  <script src="js/flash-cards.js"></script>
   <script src="js/shared-constants.js"></script>
   <script src="js/interactions.js"></script>
   <script src="js/histogram.js"></script>
