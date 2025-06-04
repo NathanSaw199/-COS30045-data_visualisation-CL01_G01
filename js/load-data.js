@@ -1,3 +1,6 @@
+// File: js/load-data.js
+// (Keep everything you already had; we only add window.allData = data)
+
 d3.csv("data/newcsv.csv", d => ({
   year: +d.YEAR,
   jurisdiction: d.JURISDICTION,
@@ -7,12 +10,16 @@ d3.csv("data/newcsv.csv", d => ({
   detectionMethod: d.DETECTION_METHOD,
   fines: +d.FINES
 })).then(data => {
-  //log the data to the console 
+  // Make the data globally accessible for bar‐chart.js
+  window.allData = data;
+
+  // Log the data to the console
   console.log(data);
-  //call functions to draw the histogram
+
+  // Draw the line chart (histogram)
   drawHistogram(data, 'all');
 
-  // --- Jurisdiction Dropdown Logic ---
+  // --- Jurisdiction Dropdown Logic (UNCHANGED) ---
   const dropdown = document.getElementById('jurisdictionDropdown');
   const selectedDiv = dropdown.querySelector('.dropdown-selected');
   const listDiv = dropdown.querySelector('.dropdown-list');
@@ -41,12 +48,11 @@ d3.csv("data/newcsv.csv", d => ({
     }
   }
 
-  // --- Detection Method Dropdown Logic ---
+  // --- Detection Method Dropdown Logic (UNCHANGED) ---
   const detectionDropdown = document.getElementById('detectionDropdown');
   const detectionSelectedDiv = detectionDropdown.querySelector('.dropdown-selected');
   const detectionListDiv = detectionDropdown.querySelector('.dropdown-list');
 
-  // Get unique detection methods from data
   const allowedMethods = [
     'Fixed camera',
     'Fixed or mobile camera',
@@ -87,12 +93,11 @@ d3.csv("data/newcsv.csv", d => ({
     }
   }
 
-  // --- Chart Update Logic ---
+  // --- Chart Update Logic (UNCHANGED) ---
   function updateChart() {
     const selectedJurisdictions = checkboxes.filter(cb => cb.checked).map(cb => cb.value);
     const selectedMethods = detectionCheckboxes.filter(cb => cb.checked).map(cb => cb.value);
 
-    // Detection method mapping logic
     let effectiveMethods = new Set(selectedMethods);
     if (selectedMethods.includes('Fixed camera') || selectedMethods.includes('Mobile camera')) {
       if (selectedMethods.includes('Fixed camera')) effectiveMethods.add('Fixed or mobile camera');
@@ -108,7 +113,6 @@ d3.csv("data/newcsv.csv", d => ({
     updateDetectionSelectedDisplay();
   }
 
-  // Listen for changes
   checkboxes.forEach(cb => {
     cb.addEventListener('change', updateChart);
   });
