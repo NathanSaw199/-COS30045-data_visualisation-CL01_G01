@@ -2,15 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Responsive D3 Chart</title>
 
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/visualisations.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
-  />
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/visualisations.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 </head>
 <body>
   <header>
@@ -18,202 +15,157 @@
   </header>
 
   <main>
-    <!-- ====================== Data Story Section ====================== -->
-    <section id="data-story" class="data-story-section">
-      <div class="story-container">
-        <h1 class="story-title">The Hidden Cost of Speed</h1>
-        <h2 class="story-subtitle">
-          Understanding Australia's Speeding Fine Landscape
-        </h2>
-
-        <div class="story-content">
-          <div class="story-text">
-            <p class="story-intro">
-              Every year, millions of Australian drivers receive speeding fines,
-              contributing billions to state revenues. But beyond the numbers
-              lies a complex story of road safety, enforcement strategies, and
-              regional differences that shape how we experience driving across
-              the continent.
-            </p>
-
-            <div class="story-highlights">
-              <div class="highlight-card">
-                <h3>Multi-State Analysis</h3>
-                <p>
-                  Compare speeding patterns across all Australian jurisdictions
-                  from Victoria to Western Australia
-                </p>
-              </div>
-
-              <div class="highlight-card">
-                <h3>Detection Methods</h3>
-                <p>
-                  Explore how different enforcement technologies impact fine
-                  distributions and road safety outcomes
-                </p>
-              </div>
-
-              <div class="highlight-card">
-                <h3>Age Demographics</h3>
-                <p>
-                  Discover which age groups are most affected by speeding fines
-                  and enforcement patterns
-                </p>
-              </div>
-
-              <div class="highlight-card">
-                <h3>Data Source</h3>
-                <p>
-                  Built using comprehensive Australian road safety enforcement
-                  data from BITRE, providing authentic insights into speeding
-                  fine patterns and trends across the continent.
-                </p>
-                <a
-                  href="https://www.bitre.gov.au/publications/2024/road-safety-enforcement-data"
-                  class="data-source-btn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Data Source
-                </a>
-              </div>
+    
+  <!-- Data Story Section -->
+  <!--GEN AI DECLARATION - Content within the data story section are added through supervised GENAI usage-->
+  <section id="data-story" class="data-story-section">
+    <div class="story-container">
+      <h1 class="story-title">The Hidden Cost of Speed</h1>
+      <h2 class="story-subtitle">Understanding Australia's Speeding Fine Landscape</h2>
+      
+      <div class="story-content">
+        <div class="story-text">
+          <p class="story-intro">
+            Every year, millions of Australian drivers receive speeding fines, contributing billions to state revenues. 
+            But beyond the numbers lies a complex story of road safety, enforcement strategies, and regional differences 
+            that shape how we experience driving across the continent.
+          </p>
+          
+          <div class="story-highlights">
+            <div class="highlight-card">
+              <h3>Multi-State Analysis</h3>
+              <p>Compare speeding patterns across all Australian jurisdictions from Victoria to Western Australia</p>
             </div>
-
-            <p class="story-call-to-action">
-              Ready to dive into the data? Our interactive visualizations reveal
-              the patterns, trends, and insights hidden within Australia's
-              speeding fine records. Filter by jurisdiction, detection method,
-              and time period to uncover the stories your state's data tells.
-            </p>
+            
+            <div class="highlight-card">
+              <h3>Detection Methods</h3>
+              <p>Explore how different enforcement technologies impact fine distributions and road safety outcomes</p>
+            </div>
+            
+            <div class="highlight-card">
+              <h3>Age Demographics</h3>
+              <p>Discover which age groups are most affected by speeding fines and enforcement patterns</p>
+            </div>
+            <div class="highlight-card">
+              <h3>Data Source</h3>
+              <p>Built using comprehensive Australian road safety enforcement data from BITRE, providing authentic insights into speeding fine patterns and trends across the continent</p>
+              <a href="https://www.bitre.gov.au/publications/2024/road-safety-enforcement-data" class="data-source-btn" target="_blank" rel="noopener noreferrer">
+                View Data Source
+              </a>
+            </div>
           </div>
-        </div>
-
-        <div class="story-actions">
-          <button id="scroll-to-viz-btn" class="scroll-btn">
-            <span>View Visualizations</span>
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M6 9l6 6 6-6"></path>
-            </svg>
-          </button>
+          
+          <p class="story-call-to-action">
+            Ready to dive into the data? Our interactive visualizations reveal the patterns, trends, and insights 
+            hidden within Australia's speeding fine records. Filter by jurisdiction, detection method, and time 
+            period to uncover the stories your state's data tells.
+          </p>
         </div>
       </div>
-    </section>
-
-    <!-- ====================== Visualization Section ====================== -->
-    <section id="visualization-section" class="viz-section">
-      <div class="viz-header">
-        <h1>Speed Fines by Jurisdiction</h1>
-        <p class="viz-description">
-          Interactive analysis of speeding fines across Australian states and
-          territories
-        </p>
+      
+      <div class="story-actions">
+        
+        
+        <button id="scroll-to-viz-btn" class="scroll-btn">
+          <span>View Visualizations</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
       </div>
+    </div>
+  </section>
 
-      <!-- ---------------------- Filter Controls ---------------------- -->
-      <div class="dropdown-row">
-        <div>
-          <div class="dropdown-title">Select jurisdiction</div>
-          <div id="jurisdictionDropdown" class="custom-multiselect">
-            <div class="dropdown-selected">
-              <span class="placeholder">Select</span>
-            </div>
-            <div class="dropdown-list">
-              <label><input type="checkbox" value="VIC" /> Victoria</label>
-              <label><input type="checkbox" value="NSW" /> New South Wales</label>
-              <label><input type="checkbox" value="QLD" /> Queensland</label>
-              <label><input type="checkbox" value="SA" /> South Australia</label>
-              <label><input type="checkbox" value="TAS" /> Tasmania</label>
-              <label><input type="checkbox" value="WA" /> Western Australia</label>
-              <label><input type="checkbox" value="NT" /> Northern Territory</label>
-              <label><input type="checkbox" value="ACT" /> Australian Capital Territory</label>
-            </div>
-          </div>
+  <!-- Visualization Section -->
+  <section id="visualization-section" class="viz-section">
+    <div class="viz-header">
+      <h1>Speed Fines by Jurisdiction</h1>
+      <p class="viz-description">Interactive analysis of speeding fines across Australian states and territories</p>
+    </div>
+  
+  
+  <!-- ---------------------- Filter Controls ---------------------- -->
+  <div class="dropdown-row">
+    <div>
+      <div class="dropdown-title">Select jurisdiction</div>
+      <div id="jurisdictionDropdown" class="custom-multiselect">
+        <div class="dropdown-selected">
+          <span class="placeholder">Select</span>
         </div>
-
-        <div>
-          <div class="dropdown-title">Select detection method</div>
-          <div id="detectionDropdown" class="custom-multiselect">
-            <div class="dropdown-selected">
-              <span class="placeholder">Select</span>
-            </div>
-            <div class="dropdown-list">
-              <!-- JS will populate detection‐method checkboxes here -->
-            </div>
-          </div>
+        <div class="dropdown-list">
+          <label><input type="checkbox" value="VIC" /> Victoria</label>
+          <label><input type="checkbox" value="NSW" /> New South Wales</label>
+          <label><input type="checkbox" value="QLD" /> Queensland</label>
+          <label><input type="checkbox" value="SA" /> South Australia</label>
+          <label><input type="checkbox" value="TAS" /> Tasmania</label>
+          <label><input type="checkbox" value="WA" /> Western Australia</label>
+          <label><input type="checkbox" value="NT" /> Northern Territory</label>
+          <label><input type="checkbox" value="ACT" /> Australian Capital Territory</label>
         </div>
       </div>
+    </div>
 
-      <!-- ---------------------- Dashboard Layout ---------------------- -->
-      <div class="dashboard-layout">
-        <!-- ---------------- Left Column ---------------- -->
-        <div class="left-column">
-          <!-- === Bar Chart / Year Multi-Select === -->
-          <div class="bar-chart-container">
-            <div style="margin-bottom: 0.5rem;">
-              <span
-                class="dropdown-title"
-                style="font-weight: 600; font-size: 1rem; color: #5a3e2b;"
-                >Select Year</span
-              >
-              <div
-                id="yearDropdown"
-                class="custom-multiselect"
-                style="width: 200px; display: inline-block; margin-left: 0.5rem;"
-              >
-                <div class="dropdown-selected">
-                  <span class="placeholder">Select</span>
-                </div>
-                <div class="dropdown-list">
-                  <!-- JS will inject each year‐checkbox here -->
-                </div>
-              </div>
-            </div>
-
-            <!-- NEW: Display selected years here -->
-            <div
-              id="selectedYearsDisplay"
-              style="margin-bottom: 1rem; font-style: italic; color: #333;"
-            ></div>
-
-            <div id="barchart" class="responsive-svg-container">
-              <div class="chart-title">
-                <h2>Fines by Jurisdiction (Selected Years)</h2>
-              </div>
-              <!-- D3 will insert the bar chart SVG here -->
-            </div>
-          </div>
-
-          <!-- === Line Chart === -->
-          <div id="histogram" class="responsive-svg-container">
-            <div class="chart-title">
-              <h2>Trends of Speeding Fines in Australia</h2>
-            </div>
-            <!-- D3 will insert the line/histogram SVG here -->
-          </div>
+    <div>
+      <div class="dropdown-title">Select detection method</div>
+      <div id="detectionDropdown" class="custom-multiselect">
+        <div class="dropdown-selected">
+          <span class="placeholder">Select</span>
         </div>
-
-        <!-- ---------------- Right Column ---------------- -->
-        <div class="right-column">
-          <!-- === Pie Chart === -->
-          <div id="piechart" class="responsive-svg-container">
-            <div class="pie-chart-title">
-              <h2>Fines by Age Group</h2>
-            </div>
-            <!-- D3 will insert the pie‐chart SVG here -->
-          </div>
+        <div class="dropdown-list">
+          <!-- JS will populate detection‐method checkboxes here -->
         </div>
       </div>
+    </div>
 
-      <!-- ---------------------- Flash Cards ---------------------- -->
+    <div>
+      <div class="dropdown-title">Select Year</div>
+      <div id="yearDropdown" class="custom-multiselect" style="min-width: 250px;">
+        <div class="dropdown-selected">
+          <span class="placeholder">Select</span>
+        </div>
+        <div class="dropdown-list">
+          <!-- JS will inject each year‐checkbox here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Dashboard Layout -->
+  <div class="dashboard-layout">
+    <!-- Left Column -->
+    <div class="left-column">
+      <!-- Bar Chart -->
+      <div class="bar-chart-container">
+        <div id="barchart" class="responsive-svg-container">
+          <div class="chart-title">
+            <h2>Fines by Jurisdiction</h2>
+            <p><i>Hover over for detailed information</i></p>
+          </div>
+          <!-- D3 will insert the bar chart SVG here -->
+        </div>
+      </div>
+      
+      <!-- Line Chart -->
+      <div id="histogram" class="responsive-svg-container">
+        <div class="chart-title"><h2>Trends of Speeding Fines in Australia</h2></div>
+        <p><i>Hover over for detailed information</i></p>
+      </div>
+    </div>
+    
+    <!-- Right Column -->
+    <div class="right-column">
+      <!-- Pie Chart -->
+      <div id="piechart" class="responsive-svg-container">
+        <div class="pie-chart-title"><h2>Fines by Age Group</h2></div>
+        <p><i>Hover over for detailed information</i></p>
+      </div>
+      
+      <!-- Flash Cards Container - MOVED THEM INSIDE RIGHT COLUMN NOW much better-->
+      <div class="flash-cards-wrapper">
+      <div class="chart-title"><h2>Important Notes</h2></div>
+      <p><i>Scroll to see all information when multiple selections are made</i></p>
       <div class="flash-cards-container" id="flashCardsContainer">
-        <!-- Victoria -->
+        
         <div class="flash-card vic" id="vicNote">
           <div class="flash-card-title">Victoria Data Notes</div>
           <ul>
@@ -224,7 +176,6 @@
           </ul>
         </div>
 
-        <!-- New South Wales -->
         <div class="flash-card nsw" id="nswNote">
           <div class="flash-card-title">New South Wales Data Notes</div>
           <ul>
@@ -238,7 +189,6 @@
           </ul>
         </div>
 
-        <!-- Queensland -->
         <div class="flash-card qld" id="qldNote">
           <div class="flash-card-title">Queensland Data Notes</div>
           <ul>
@@ -251,7 +201,6 @@
           </ul>
         </div>
 
-        <!-- South Australia -->
         <div class="flash-card sa" id="saNote">
           <div class="flash-card-title">South Australia Data Notes</div>
           <ul>
@@ -262,7 +211,6 @@
           </ul>
         </div>
 
-        <!-- Tasmania -->
         <div class="flash-card tas" id="tasNote">
           <div class="flash-card-title">Tasmania Data Notes</div>
           <ul>
@@ -273,7 +221,6 @@
           </ul>
         </div>
 
-        <!-- Western Australia -->
         <div class="flash-card wa" id="waNote">
           <div class="flash-card-title">Western Australia Data Notes</div>
           <ul>
@@ -284,7 +231,6 @@
           </ul>
         </div>
 
-        <!-- Northern Territory -->
         <div class="flash-card nt" id="ntNote">
           <div class="flash-card-title">Northern Territory Data Notes</div>
           <ul>
@@ -294,7 +240,6 @@
           </ul>
         </div>
 
-        <!-- Australian Capital Territory -->
         <div class="flash-card act" id="actNote">
           <div class="flash-card-title">Australian Capital Territory Data Notes</div>
           <ul>
@@ -306,7 +251,6 @@
           </ul>
         </div>
 
-        <!-- Multi‐State Comparison -->
         <div class="flash-card multi" id="multiStateNote">
           <div class="flash-card-title">Multi-State Comparison Notes</div>
           <ul>
@@ -318,74 +262,50 @@
           </ul>
         </div>
 
-        <!-- Overview (default) -->
         <div class="flash-card multi" id="overviewNote">
-          <div class="flash-card-title">
-            Australian Road Safety Enforcement Data Overview
-          </div>
+          <div class="flash-card-title">Australian Road Safety Enforcement Data Overview</div>
           <ul>
-            <li>
-              <strong>Data Source:</strong>
-              <a
-                href="https://www.bitre.gov.au/publications/2024/road-safety-enforcement-data"
-                >Bureau of Infrastructure and Transport Research Economics
-                (BITRE)</a
-              >
-            </li>
+            <li><strong>Data Source:</strong> <a href="https://www.bitre.gov.au/publications/2024/road-safety-enforcement-data"> Bureau of Infrastructure and Transport Research Economics (BITRE)</a></li>
             <li><strong>Collection:</strong> Police agencies in each state and territory</li>
             <li><strong>Coverage:</strong> Police-issued fines from 2017, enhanced from 2023</li>
             <li><strong>New for 2023:</strong> Monthly data, age groups, detection methods, drug types</li>
             <li><strong>Limitations:</strong> Some agencies collect partial data only</li>
             <li><strong>Detection Methods:</strong> Fixed cameras, mobile cameras, police-issued</li>
-            <li>
-              <strong>Data Quality:</strong> Subject to revision, some gaps due to quality issues
-            </li>
+            <li><strong>Data Quality:</strong> Subject to revision, some gaps due to quality issues</li>
             <li><strong>Note:</strong> Not all states share enforcement data publicly</li>
-            <!-- NEW Explanatory Items -->
-            <li>
-              Some age categories show up as “Unknown” because certain records did not
-              include an age or the age was redacted.
-            </li>
-            <li>
-              Certain jurisdictions do not have data for some detection methods because
-              those enforcement techniques are either not used or not reported in that
-              jurisdiction’s dataset.
-            </li>
           </ul>
         </div>
-      </div>
-      <!-- ================= End Flash Cards ================= -->
-    </section>
-    <!-- =============== End Visualization Section =============== -->
-  </main>
+
+      </div> 
+    </div>
+  </div>
+ </section>
+</main>
 
   <footer>
-    <p>© 2025 Data Visualisation</p>
-    <p class="source-text">
-      Data source:
-      <a
-        href="https://www.bitre.gov.au/publications/2024/road-safety-enforcement-data"
-        class="source-link"
-        >Australian Speed Fines Data</a
-      >
-      (Downloaded January 2025)
-    </p>
+    <p>© 2025 Data Visualisation </p>
+    <p class="source-text">Data source: <a href="https://www.bitre.gov.au/publications/2024/road-safety-enforcement-data" class="source-link">Australian Speed Fines Data</a> (Downloaded January 2025)</p>
   </footer>
-
-  <!-- ================= Smooth Scroll Script ================= -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const scrollBtn = document.getElementById('scroll-to-viz-btn');
-      const vizSection = document.getElementById('visualization-section');
-      function smoothScrollToViz() {
-        vizSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-      scrollBtn.addEventListener('click', smoothScrollToViz);
-    });
-  </script>
-
-  <!-- ================= D3 & Custom Scripts ================= -->
+<!--  scroll functionality -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const exploreBtn = document.getElementById('explore-data-btn');
+    const scrollBtn = document.getElementById('scroll-to-viz-btn');
+    const vizSection = document.getElementById('visualization-section');
+    
+    function smoothScrollToViz() {
+      vizSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    
+    
+    scrollBtn.addEventListener('click', smoothScrollToViz);
+  });
+</script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
+
   <script src="js/flash-cards.js"></script>
   <script src="js/shared-constants.js"></script>
   <script src="js/interactions.js"></script>
@@ -394,5 +314,6 @@
   <script src="js/bar-chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <script type="module" src="js/piechart.js"></script>
+
 </body>
 </html>

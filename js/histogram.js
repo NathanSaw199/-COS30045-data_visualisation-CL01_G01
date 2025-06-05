@@ -33,12 +33,12 @@ const drawHistogram = (data, selectedJurisdiction = 'all') => {
         return { year, fines };
       })
     };
-  }).filter(d => d.values.some(v => v.fines > 0)); // Only show lines with data
+  }).filter(d => d.values.some(v => v.fines > 0)); 
 
-  // Set dimensions and margins
-  const width = 1000;
-  const height = 400;
-  const margin = { top: 40, right: 220, bottom: 60, left: 70 };
+  // Set dimensions and margins 
+  const width = 800;  
+  const height = 320; 
+  const margin = { top: 30, right: 180, bottom: 50, left: 60 }; 
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -62,7 +62,7 @@ const drawHistogram = (data, selectedJurisdiction = 'all') => {
     .range([innerHeight, 0])
     .nice();
 
-  // Use of colourblinf drienldy colurs pallets 
+  // Use colourblind friendly colours palette 
   //https://www.color-hex.com/color-palette/1018347
   const wongColors = [
     "#000000", "#E69F00", "#56B4E9", "#009E73", 
@@ -73,27 +73,27 @@ const drawHistogram = (data, selectedJurisdiction = 'all') => {
   const colorScale = d3.scaleOrdinal()
     .domain(lineData.map(d => d.label))
     .range(wongColors);
-  
-  
 
-// Define different dash patterns
-const dashPatterns = [
-  "none",           // solid line
-  "5,5",            // dashed (--- --- ---)
-  "2,3",            // short dash
-  "10,5,2,5",       // dash-dot (-.-.-.)
-  "10,5,2,5,2,5",   // dash-dot-dot (-..-..-..)
-  "15,3,3,3",       // long dash-dot
-  "3,3",            // dotted (...)
-  "8,3,2,3,2,3",    // dash-dot-dot with longer dash
-  "12,2",           // long dash
-  "6,2,2,2,2,2"     // dash with multiple dots
-];
+  // Define different dash patterns
+  //GENAI DECLARATION - used to find line patterns
+  const dashPatterns = [
+    "none",           // solid line
+    "5,5",            // dashed (--- --- ---)
+    "2,3",            // short dash
+    "10,5,2,5",       // dash-dot (-.-.-.)
+    "10,5,2,5,2,5",   // dash-dot-dot (-..-..-..)
+    "15,3,3,3",       // long dash-dot
+    "3,3",            // dotted (...)
+    "8,3,2,3,2,3",    // dash-dot-dot with longer dash
+    "12,2",           // long dash
+    "6,2,2,2,2,2"     // dash with multiple dots
+  ];
 
-// Create dash pattern scale
-const dashScale = d3.scaleOrdinal()
-  .domain(lineData.map(d => d.label))
-  .range(dashPatterns);
+  // Create dash pattern scale
+  const dashScale = d3.scaleOrdinal()
+    .domain(lineData.map(d => d.label))
+    .range(dashPatterns);
+
   // Draw lines
   const line = d3.line()
     .x(d => xScale(d.year))
@@ -128,54 +128,57 @@ const dashScale = d3.scaleOrdinal()
     .call(bottomAxis)
     .selectAll("text")
     .attr("dy", "0.5em")
-    .attr("dx", "-1.5em")
-    .attr("transform", "rotate(-40)")
-    .style("text-anchor", "end");
-
+    .attr("dx", "-1.2em") 
+    .attr("transform", "rotate(-35)") 
+    .style("text-anchor", "end")
+    .style("font-size", "11px"); 
   // X axis label
   svg.append("text")
     .text("Year")
     .attr("x", margin.left + innerWidth / 2)
     .attr("y", height - margin.bottom / 4)
     .attr("text-anchor", "middle")
-    .attr("class", "axis-label");
+    .attr("class", "axis-label")
+    .style("font-size", "12px"); 
 
   // Y axis
-  const leftAxis = d3.axisLeft(yScale);
+  const leftAxis = d3.axisLeft(yScale).ticks(5); 
   innerChart.append("g")
-    .call(leftAxis);
+    .call(leftAxis)
+    .selectAll("text")
+    .style("font-size", "11px"); 
 
   // Y axis label
   svg.append("text")
     .text("Fines")
     .attr("x", 0 - height / 2)
-    .attr("y", 20)
+    .attr("y", 15) 
     .attr("transform", `rotate(-90)`)
     .attr("text-anchor", "middle")
-    .attr("class", "axis-label");
+    .attr("class", "axis-label")
+    .style("font-size", "12px"); 
 
-  // Legend
+  // Compact Legend
   const legend = svg.append("g")
-    .attr("transform", `translate(${width - margin.right + 40}, ${margin.top})`);
+    .attr("transform", `translate(${width - margin.right + 20}, ${margin.top})`);
 
   lineData.forEach((combo, i) => {
     const legendRow = legend.append("g")
-      .attr("transform", `translate(0, ${i * 20})`);
+      .attr("transform", `translate(0, ${i * 16})`); 
 
     legendRow.append("line")
       .attr("x1", 0)
       .attr("y1", 0)
-      .attr("x2", 20)
+      .attr("x2", 15) 
       .attr("y2", 0)
       .attr("stroke", colorScale(combo.label))
       .attr("stroke-width", 2)
       .attr("stroke-dasharray", selectedJurisdiction === 'all' ? "none" : dashScale(combo.label));
-      
-      
 
     legendRow.append("text")
-      .attr("x", 30)
-      .attr("y", 4)
-      .text(combo.label);
+      .attr("x", 20) 
+      .attr("y", 3)
+      .text(combo.label)
+      .style("font-size", "11px"); 
   });
 };

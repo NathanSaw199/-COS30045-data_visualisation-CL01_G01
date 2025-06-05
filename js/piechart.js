@@ -1,6 +1,8 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 console.log(" piechart.js loaded");
 
+// Use colourblind friendly colours palette 
+//https://www.color-hex.com/color-palette/1018347
 const wongColors = [
   "#000000", "#E69F00", "#56B4E9", "#009E73", 
   "#F0E442", "#0072B2", "#D55E00", "#CC79A7"

@@ -83,18 +83,12 @@
   background-color: #d2691e;    
   color: white;
 }
-.bar{
-  fill:#606464;
-  stroke:#fffaf0;
-  stroke-width:2;
-}
 
-/* Limit the width of the dropdown */
+
 .choices {
   max-width: 500px;
 }
 
-/* Make tags more compact */
 .choices__list--multiple .choices__item {
   display: inline-block;
   max-width: 120px;
@@ -110,7 +104,6 @@
   display: none;
 }
 
-/* multiselect dropdown styles */
 .custom-multiselect {
   position: relative;
   width: 140px;
@@ -174,122 +167,286 @@
 
 .dropdown-row {
   display: flex;
-  gap: 12px;
+  gap: 2rem;
   align-items: flex-end;
+  justify-content: center;
+  margin: 2rem auto;
+  max-width: 1000px;
+  flex-wrap: wrap; 
 }
 
 .dropdown-title {
-  font-weight: bold;
-  font-size: 1.08em;
+  font-weight: 600;
+  font-size: 1rem;
   color: #5a3e2b;
-  margin-bottom: 4px;
-  margin-left: 2px;
+  margin-bottom: 8px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  opacity: 0.9;
 }
 
-/* Simple Flash Cards */
+/* Dashboaddd */
+.dashboard-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 400px !important;
+  grid-template-rows: 480px 450px !important; 
+  gap: 1rem !important;
+  margin: 1rem auto !important;
+  max-width: 1400px !important;
+  height: 940px !important; 
+}
+
+.left-column {
+  display: grid !important;
+  grid-template-rows: 480px 450px !important; /*  space for bar chart */
+  gap: 1rem !important;
+  grid-row: 1 / 3 !important;
+}
+
+.right-column {
+  display: grid !important;
+  grid-template-rows: 480px 450px !important; /* I added more space for pie chart too */
+  gap: 1rem !important;
+  grid-column: 2 !important;
+  grid-row: 1 / 3 !important;
+}
+
+/* Chart positioning  */
+.bar-chart-container {
+  order: 1;
+  height: 480px !important;
+  max-height: 480px !important;
+  overflow: hidden;
+}
+
+/* Pie chart - top right also extra space now*/
+#piechart {
+  grid-row: 1 !important;
+  height: 480px !important;
+  max-height: 480px !important;
+  margin-top: 0 !important;
+  align-self: stretch !important;
+  overflow: hidden;
+  margin-right: 100cm;
+}
+
+/* Flash cards  */
+.flash-cards-container {
+  grid-row: 2 !important;
+}
+
+
+#histogram {
+  order: 2;
+  height: 450px !important;
+  max-height: 450px !important;
+  overflow: hidden;
+}
+
+#histogram .responsive-svg-container {
+  max-height: 450px !important;
+  height: 450px !important;
+}
 
 .flash-cards-container {
-  margin: 1.5rem 0;
-  display: grid;
-  gap: 1rem;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  
+.flash-cards-wrapper {
+  grid-row: 2 !important;
+  display: flex;
+  flex-direction: column;
+}
+  
+  
+  height: 450px !important;
+  max-height: 450px !important; 
+  min-height: 200px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  
+  width: 100%;
+  max-width:500px;
+
+  
+  /*  scrollbar  */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.2) transparent;
 }
 
+/* scroll */
+.flash-cards-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.flash-cards-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.flash-cards-container::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+.flash-cards-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.3);
+}
+
+/*flashcards*/
 .flash-card {
   background: #ffffff;
-  border: 2px solid #e9ecef;
-  border-radius: 6px;
-  padding: 1.2rem;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 0.6rem;
   display: none;
-  font-size: 0.9rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  font-size: 0.7rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+  margin-bottom: 0.6rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.flash-card:last-child {
+  margin-bottom: 0;
+}
+
+.flash-card:hover {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
 }
 
 .flash-card.show {
   display: block;
 }
 
-/* Different colors for each jurisdiction */
-.flash-card.vic { border-left: 4px solid #007bff; }
-.flash-card.nsw { border-left: 4px solid #28a745; }
-.flash-card.qld { border-left: 4px solid #ffc107; }
-.flash-card.sa { border-left: 4px solid #dc3545; }
-.flash-card.tas { border-left: 4px solid #6f42c1; }
-.flash-card.wa { border-left: 4px solid #fd7e14; }
-.flash-card.nt { border-left: 4px solid #20c997; }
-.flash-card.act { border-left: 4px solid #e83e8c; }
-.flash-card.multi { border-left: 4px solid #6c757d; }
+/* diff colors for for different jurisdictions for identification purposes */
+.flash-card.vic { border-left: 3px solid #007bff; }
+.flash-card.nsw { border-left: 3px solid #28a745; }
+.flash-card.qld { border-left: 3px solid #ffc107; }
+.flash-card.sa { border-left: 3px solid #dc3545; }
+.flash-card.tas { border-left: 3px solid #6f42c1; }
+.flash-card.wa { border-left: 3px solid #fd7e14; }
+.flash-card.nt { border-left: 3px solid #20c997; }
+.flash-card.act { border-left: 3px solid #e83e8c; }
+.flash-card.multi { border-left: 3px solid #6c757d; }
 
 .flash-card-title {
   font-weight: 600;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.4rem;
   color: #343a40;
-  font-size: 1rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px solid #e9ecef;
+  font-size: 0.75rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid #f1f3f4;
+  line-height: 1.2;
 }
 
 .flash-card ul {
   margin: 0;
-  padding-left: 1.2rem;
+  padding-left: 1rem;
   color: #495057;
 }
 
 .flash-card li {
-  margin-bottom: 0.3rem;
-  line-height: 1.4;
+  margin-bottom: 0.15rem;
+  line-height: 1.3;
+  font-size: 0.65rem;
 }
 
-/* Grid layout for multiple cards */
-@media (min-width: 768px) {
-  .flash-cards-container.multiple {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
+
+.flash-card#overviewNote {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid #dee2e6;
+  border-left: 3px solid #6c757d;
 }
 
-/* DEBUGGING --- verride the existing responsive-svg-container styles  */
+.flash-card#multiStateNote {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border: 1px solid #ffeaa7;
+  border-left: 3px solid #f39c12;
+}
+
+.flash-card#multiStateNote .flash-card-title {
+  color: #856404;
+}
+
+
 .dashboard-layout .responsive-svg-container {
   width: 100%;
-  max-width: none; 
-  margin: 0; 
-}
-
-/* Ensure dashboard layout takes precedence */
-.dashboard-layout {
-  display: grid !important;
-  grid-template-columns: 1fr 400px !important;
-  gap: 2rem !important;
-  margin: 2rem auto !important;
-  max-width: 1400px !important;
-}
-
-.left-column {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 2rem !important;
-}
-
-.right-column {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 1.5rem !important;
-}
-
-/* Ensure chart containers fill their parent containers */
-.dashboard-layout #histogram,
-.dashboard-layout #piechart {
-  width: 100%;
-  height: auto;
+  max-width: none;
   margin: 0;
 }
 
-/* this is tp make sure flash cards are outside the grid */
-.flash-cards-container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 2rem auto 0 auto;
-  grid-column: 1 / -1; 
+.flash-cards-container:not(.has-visible-cards) {
+  display: none !important;
 }
 
-.dashboard-layout #piechart {
-  margin-top: 8rem; 
+/* Responsive design */
+@media (max-width: 1200px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto auto !important;
+    gap: 1.5rem !important;
+  }
+  
+  .left-column {
+    grid-template-rows: auto !important;
+  }
+  
+  .right-column {
+    grid-template-rows: auto !important;
+  }
+  
+  .bar-chart-container {
+    order: 1;
+  }
+  
+  #piechart {
+    order: 2;
+  }
+  
+  #histogram {
+    order: 3;
+    max-height: none; 
+  }
+  
+  .flash-cards-container {
+    order: 4;
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .flash-card {
+    padding: 0.5rem;
+    font-size: 0.65rem;
+  }
+  
+  .flash-card-title {
+    font-size: 0.7rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .flash-card li {
+    font-size: 0.6rem;
+    margin-bottom: 0.1rem;
+  }
+  
+  .flash-cards-container {
+    max-height: 250px;
+    padding: 0.5rem;
+    grid-template-columns: 1fr; 
+  }
+  
+  #histogram {
+    max-height: none;
+  }
+
+  
 }

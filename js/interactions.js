@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       addHistogramInteractions();
       addPieChartInteractions();
+      addBarChartInteractions();
       addGlobalKeyboardShortcuts();
       setupChartUpdateListeners();
       console.log("All interactions successfully initialized!");
@@ -32,18 +33,85 @@ function setupChartUpdateListeners() {
               setTimeout(() => addHistogramInteractions(), 100);
             } else if (container === 'piechart') {
               setTimeout(() => addPieChartInteractions(), 100);
-            }
-            break;
+            } else if (container === 'barchart') {
+              setTimeout(() => addBarChartInteractions(), 100);
+            }break;
           }
         }
       }
     });
   });
 
-  ['histogram', 'piechart'].forEach(id => {
+  ['histogram', 'piechart', 'barchart'].forEach(id => {
     const container = document.getElementById(id);
     if (container) observer.observe(container, { childList: true, subtree: true });
   });
+}
+
+// ----- BAR CHART INTERACTIONS ----
+function addBarChartInteractions() {
+  const svg = d3.select("#barchart svg");
+  if (svg.empty()) return;
+  
+  console.log("Adding bar chart interactions...");
+
+  // Clear existing interactions
+  svg.selectAll(".year-bar").on("mouseover mouseout click", null);
+
+  svg.selectAll(".year-bar")
+    .on("mouseover", function(event, d) {
+      // Get the jurisdiction from the parent group
+      const parentGroup = d3.select(this.parentNode);
+      const jurisdiction = parentGroup.datum().jurisdiction;
+      
+      // Highlight current bar
+      d3.select(this)
+        .transition().duration(200)
+        .style("filter", "brightness(1.2)")
+        .style("stroke", "#333")
+        .style("stroke-width", "2px");
+
+      // Dim other bars
+      svg.selectAll(".year-bar").filter(function() { return this !== event.target; })
+        .transition().duration(200)
+        .style("opacity", 0.4);
+
+      // Show tooltip
+      showTooltip(event, {
+        jurisdiction: jurisdiction,
+        year: d.year,
+        fines: d.fines.toLocaleString()
+      });
+    })
+    .on("mouseout", function() {
+      // Reset all bars
+      svg.selectAll(".year-bar")
+        .transition().duration(200)
+        .style("opacity", 1)
+        .style("filter", "none")
+        .style("stroke", "none")
+        .style("stroke-width", "0px");
+
+      hideTooltip();
+    })
+    .on("click", function(event, d) {
+      event.stopPropagation();
+      
+      // Quick scale animation
+      d3.select(this)
+        .transition().duration(100)
+        .attr("transform", "scale(1.05)")
+        .transition().duration(100)
+        .attr("transform", "scale(1)");
+      
+      // Get jurisdiction from parent group
+      const parentGroup = d3.select(this.parentNode);
+      const jurisdiction = parentGroup.datum().jurisdiction;
+      
+      console.log(`Selected: ${jurisdiction} - ${d.year} with ${d.fines.toLocaleString()} fines`);
+    });
+
+  console.log(`Bar chart interactions added to ${svg.selectAll(".year-bar").size()} bars`);
 }
 
 // ----- HISTOGRAM INTERACTIONS ----
