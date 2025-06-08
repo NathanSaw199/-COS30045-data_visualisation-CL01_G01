@@ -254,7 +254,7 @@
   background: #f8f9fa;
   border: 1px solid #e9ecef;
   border-radius: 8px;
-  padding: 0.75rem;
+  padding: 1rem;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   
 .flash-cards-wrapper {
@@ -300,17 +300,18 @@
 /*flashcards*/
 .flash-card {
   background: #ffffff;
-  border: 1px solid #e9ecef;
-  border-radius: 4px;
-  padding: 0.6rem;
+  border: 1px solid #d1d5db;;
+  border-radius: 6px;
+  padding: 1rem;
   display: none;
-  font-size: 0.7rem;
+  font-size: 0.875rem;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   transition: all 0.2s ease;
   margin-bottom: 0.6rem;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  line-height: 1.5;
 }
 
 .flash-card:last-child {
@@ -339,24 +340,24 @@
 
 .flash-card-title {
   font-weight: 600;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
   color: #343a40;
-  font-size: 0.75rem;
-  padding-bottom: 0.2rem;
+  font-size: 0.95rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid #f1f3f4;
   line-height: 1.2;
 }
 
 .flash-card ul {
   margin: 0;
-  padding-left: 1rem;
+  padding-left: 1.25rem;
   color: #495057;
 }
 
 .flash-card li {
-  margin-bottom: 0.15rem;
-  line-height: 1.3;
-  font-size: 0.65rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  font-size: 0.8rem;
 }
 
 
@@ -424,17 +425,17 @@
 
 @media (max-width: 768px) {
   .flash-card {
-    padding: 0.5rem;
-    font-size: 0.65rem;
+    padding: 0.875rem;
+    font-size: 0.85rem;
   }
   
   .flash-card-title {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     margin-bottom: 0.3rem;
   }
   
   .flash-card li {
-    font-size: 0.6rem;
+    font-size: 0.76rem;
     margin-bottom: 0.1rem;
   }
   

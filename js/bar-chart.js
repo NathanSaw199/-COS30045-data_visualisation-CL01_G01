@@ -31,7 +31,7 @@
       // No box checked ⇒ show "Latest 10 years"
       const sortedYears = uniqueYears.sort((a, b) => b - a);
       const latest10 = sortedYears.slice(0, 10).sort((a, b) => a - b);
-      placeholderSpan.textContent = `${latest10[0]}-${latest10[latest10.length - 1]} (Latest 10)`;
+      placeholderSpan.textContent = `${latest10[0]}-${latest10[latest10.length - 1]} `;
     } else if (chosenYears.length === uniqueYears.length) {
       // All boxes checked
       placeholderSpan.textContent = 'All Years';
