@@ -452,3 +452,8 @@
   
 }
 
+/* override the container so the rotated labels aren’t clipped */
+.bar-chart-container,
+.responsive-svg-container {
+  overflow: visible !important;
+}
