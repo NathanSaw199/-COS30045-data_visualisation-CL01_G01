@@ -134,16 +134,17 @@
   <div class="dashboard-layout">
     <!-- Left Column -->
     <div class="left-column">
-      <!-- Bar Chart -->
-      <div class="bar-chart-container">
-        <div id="barchart" class="responsive-svg-container">
-          <div class="chart-title">
-            <h2>Fines by Jurisdiction</h2>
-            <p><i>Hover over for detailed information</i></p> <!-- BUG 1 - this is not showing up on the web page-->
-          </div>
-          <!-- D3 will insert the bar chart SVG here -->
-        </div>
-      </div>
+      <!-- Bar Chart --><div class="bar-chart-container">
+  <div class="chart-header">
+    <div class="chart-title">
+      <h2>Fines by Jurisdiction</h2>
+    </div>
+    <div class="chart-tooltip-hint">Hover over for detailed information</div>
+  </div>
+  <div id="barchart" class="responsive-svg-container">
+    <!-- D3 will insert the bar chart SVG here -->
+  </div>
+</div>
       
       <!-- Line Chart -->
       <div id="histogram" class="responsive-svg-container">
